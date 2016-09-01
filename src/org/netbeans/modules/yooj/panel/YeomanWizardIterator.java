@@ -111,40 +111,40 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                                 addArgument("--template=blank").
                                 addArgument("--platforms=ios").
                                 workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navBar-android")) {
+                    } else if (type.equals("navbar-android")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
                                 addArgument("--appName='"+projectName+"'").
-                                addArgument("--template=navBar").
+                                addArgument("--template=navbar").
                                 addArgument("--platforms=android").
                                 workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navBar-ios")) {
+                    } else if (type.equals("navbar-ios")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
                                 addArgument("--appName='"+projectName+"'").
-                                addArgument("--template=navBar").
+                                addArgument("--template=navbar").
                                 addArgument("--platforms=ios").
                                 workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navDrawer-android")) {
+                    } else if (type.equals("navdrawer-android")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
                                 addArgument("--appName='"+projectName+"'").
-                                addArgument("--template=navDrawer").
+                                addArgument("--template=navdrawer").
                                 addArgument("--platforms=android").
                                 workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navDrawer-ios")) {
+                    } else if (type.equals("navdrawer-ios")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
                                 addArgument("--appName='"+projectName+"'").
-                                addArgument("--template=navDrawer").
+                                addArgument("--template=navdrawer").
                                 addArgument("--platforms=ios").
                                 workingDirectory(new File(dirF.getParent())).call();
                     }
