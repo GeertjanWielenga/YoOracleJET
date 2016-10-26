@@ -92,13 +92,13 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                 @Override
                 public Process call() throws Exception {
                     String yo = NbPreferences.forModule(YeomanOptionsPanelController.class).get("yoExecutableLocation", "");
-                    //Format: oraclejet:hybrid app --appName='app' --template=navBar --platforms=android
+                    //Format: oraclejet:hybrid app --appName=app --template=navBar --platforms=android
                     if (type.equals("blank-android")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName='"+projectName+"'").
+                                addArgument("--appName="+projectName).
                                 addArgument("--template=blank").
                                 addArgument("--platforms=android").
                                 workingDirectory(new File(dirF.getParent())).call();
@@ -107,7 +107,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName='"+projectName+"'").
+                                addArgument("--appName="+projectName).
                                 addArgument("--template=blank").
                                 addArgument("--platforms=ios").
                                 workingDirectory(new File(dirF.getParent())).call();
@@ -116,7 +116,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName='"+projectName+"'").
+                                addArgument("--appName="+projectName).
                                 addArgument("--template=navbar").
                                 addArgument("--platforms=android").
                                 workingDirectory(new File(dirF.getParent())).call();
@@ -125,7 +125,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName='"+projectName+"'").
+                                addArgument("--appName="+projectName).
                                 addArgument("--template=navbar").
                                 addArgument("--platforms=ios").
                                 workingDirectory(new File(dirF.getParent())).call();
@@ -134,7 +134,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName='"+projectName+"'").
+                                addArgument("--appName="+projectName).
                                 addArgument("--template=navdrawer").
                                 addArgument("--platforms=android").
                                 workingDirectory(new File(dirF.getParent())).call();
@@ -143,7 +143,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName='"+projectName+"'").
+                                addArgument("--appName="+projectName).
                                 addArgument("--template=navdrawer").
                                 addArgument("--platforms=ios").
                                 workingDirectory(new File(dirF.getParent())).call();
