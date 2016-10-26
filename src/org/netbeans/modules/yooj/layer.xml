@@ -5,71 +5,35 @@
     <folder name="Templates">
         <folder name="Project">
             <folder name="ClientSide">
-                <file name="org-netbeans-modules-yooj-BlankProject-android">
+                <file name="org-netbeans-modules-yooj-BlankProject">
                     <attr boolvalue="true" name="template"/>
                     <attr intvalue="800" name="position"/>
-                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#Blank_displayName_android" name="displayName"/>
+                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#Blank_displayName" name="displayName"/>
                     <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
                     <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/BlankJETWizardDescription.html"/>
                     <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
                     <attr boolvalue="true" name="requireProject"/>
-                    <attr name="type" stringvalue="blank-android"/>
-                    <attr name="cmd" stringvalue="oraclejet:hybrid app --appName='app' --template=blank --platforms=android"/>
+                    <attr name="type" stringvalue="blank"/>
                 </file>
-                <file name="org-netbeans-modules-yooj-BlankProject-ios">
-                    <attr boolvalue="true" name="template"/>
-                    <attr intvalue="801" name="position"/>
-                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#Blank_displayName_ios" name="displayName"/>
-                    <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
-                    <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/BlankJETWizardDescription2.html"/>
-                    <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
-                    <attr boolvalue="true" name="requireProject"/>
-                    <attr name="type" stringvalue="blank-ios"/>
-                    <attr name="cmd" stringvalue="oraclejet:hybrid app --appName='app' --template=blank --platforms=ios"/>
-                </file>
-                <file name="org-netbeans-modules-yooj-NavBarProject-android">
+                <file name="org-netbeans-modules-yooj-NavBarProject">
                     <attr boolvalue="true" name="template"/>
                     <attr intvalue="802" name="position"/>
-                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavBar_displayName_android" name="displayName"/>
+                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavBar_displayName" name="displayName"/>
                     <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
                     <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/NavBarJETWizardDescription.html"/>
                     <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
                     <attr boolvalue="true" name="requireProject"/>
-                    <attr name="type" stringvalue="navbar-android"/>
-                    <attr name="cmd" stringvalue="oraclejet:hybrid app --appName='app' --template=navbar --platforms=android"/>
+                    <attr name="type" stringvalue="navbar"/>
                 </file>
-                <file name="org-netbeans-modules-yooj-NavBarProject-ios">
-                    <attr boolvalue="true" name="template"/>
-                    <attr intvalue="803" name="position"/>
-                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavBar_displayName_ios" name="displayName"/>
-                    <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
-                    <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/NavBarJETWizardDescription2.html"/>
-                    <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
-                    <attr boolvalue="true" name="requireProject"/>
-                    <attr name="type" stringvalue="navbar-ios"/>
-                    <attr name="cmd" stringvalue="oraclejet:hybrid app --appName='app' --template=navbar --platforms=ios"/>
-                </file>
-                <file name="org-netbeans-modules-yooj-NavDrawerProject-android">
+                <file name="org-netbeans-modules-yooj-NavDrawerProject">
                     <attr boolvalue="true" name="template"/>
                     <attr intvalue="804" name="position"/>
-                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavDrawer_displayName_android" name="displayName"/>
+                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavDrawer_displayName" name="displayName"/>
                     <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
                     <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/NavDrawerJETWizardDescription.html"/>
                     <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
                     <attr boolvalue="true" name="requireProject"/>
-                    <attr name="type" stringvalue="navdrawer-android"/>
-                    <attr name="cmd" stringvalue="oraclejet:hybrid app --appName='app' --template=navdrawer --platforms=android"/>
-                </file>
-                <file name="org-netbeans-modules-yooj-NavDrawerProject-ios">
-                    <attr boolvalue="true" name="template"/>
-                    <attr intvalue="805" name="position"/>
-                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavDrawer_displayName_ios" name="displayName"/>
-                    <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
-                    <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/NavDrawerJETWizardDescription2.html"/>
-                    <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
-                    <attr boolvalue="true" name="requireProject"/>
-                    <attr name="type" stringvalue="navdrawer-ios"/>
-                    <attr name="cmd" stringvalue="oraclejet:hybrid app --appName='app' --template=navdrawer --platforms=ios"/>
+                    <attr name="type" stringvalue="navdrawer"/>
                 </file>
             </folder>
         </folder>

@@ -24,10 +24,16 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         // Register listener on the textFields to make the automatic updates
         projectNameTextField.getDocument().addDocumentListener(this);
         projectLocationTextField.getDocument().addDocumentListener(this);
+        androidPlatformChoice.setActionCommand("android");
+        iosPlatformChoice.setActionCommand("ios");
     }
 
     public String getProjectName() {
         return this.projectNameTextField.getText();
+    }
+
+    public String getSelectedPlatform() {
+        return buttonGroup1.getSelection().getActionCommand();
     }
 
     /**
@@ -38,6 +44,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         projectNameLabel = new javax.swing.JLabel();
         projectNameTextField = new javax.swing.JTextField();
         projectLocationLabel = new javax.swing.JLabel();
@@ -45,6 +52,9 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         browseButton = new javax.swing.JButton();
         createdFolderLabel = new javax.swing.JLabel();
         createdFolderTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        androidPlatformChoice = new javax.swing.JRadioButton();
+        iosPlatformChoice = new javax.swing.JRadioButton();
 
         projectNameLabel.setLabelFor(projectNameTextField);
         org.openide.awt.Mnemonics.setLocalizedText(projectNameLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.projectNameLabel.text")); // NOI18N
@@ -65,6 +75,15 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
         createdFolderTextField.setEditable(false);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel1.text")); // NOI18N
+
+        buttonGroup1.add(androidPlatformChoice);
+        androidPlatformChoice.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(androidPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.androidPlatformChoice.text")); // NOI18N
+
+        buttonGroup1.add(iosPlatformChoice);
+        org.openide.awt.Mnemonics.setLocalizedText(iosPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.iosPlatformChoice.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,14 +93,22 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(projectNameLabel)
                     .addComponent(projectLocationLabel)
-                    .addComponent(createdFolderLabel))
+                    .addComponent(createdFolderLabel)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(projectNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                    .addComponent(projectLocationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                    .addComponent(createdFolderTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(browseButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(projectNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                            .addComponent(projectLocationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                            .addComponent(createdFolderTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(browseButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(androidPlatformChoice)
+                        .addGap(18, 18, 18)
+                        .addComponent(iosPlatformChoice)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -100,6 +127,11 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createdFolderLabel)
                     .addComponent(createdFolderTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(androidPlatformChoice)
+                    .addComponent(iosPlatformChoice)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -128,9 +160,13 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     }//GEN-LAST:event_browseButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton androidPlatformChoice;
     private javax.swing.JButton browseButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel createdFolderLabel;
     private javax.swing.JTextField createdFolderTextField;
+    private javax.swing.JRadioButton iosPlatformChoice;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel projectLocationLabel;
     private javax.swing.JTextField projectLocationTextField;
     private javax.swing.JLabel projectNameLabel;
@@ -207,8 +243,10 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         String projectName = (String) settings.getProperty("name");
         if (projectName == null) {
 //            projectName = settings.getProperty("selectedGenerator").toString().replace(":", "-");
-            String type = Templates.getTemplate(settings).getAttribute("type").toString();
-            projectName = type + "HybridOracleJETApp";
+            final String type = Templates.getTemplate(settings).getAttribute("type").toString();
+            String platform = getSelectedPlatform();
+            settings.putProperty("platform", platform);
+            projectName = type+"HybridOracleJETApp";
         }
         this.projectNameTextField.setText(projectName);
         this.projectNameTextField.selectAll();

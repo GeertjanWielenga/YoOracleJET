@@ -66,16 +66,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
         String message = "Creating "+ type +" Oracle JET application...";
         ProgressHandle ph = ProgressHandleFactory.createSystemHandle(message);
         ph.start();
-//        ProgressUtils.showProgressDialogAndRun(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-                    createYoApp(ph, type);
-//                } catch (IOException ex) {
-//                    Exceptions.printStackTrace(ex);
-//                }
-//            }
-//        }, message);
+        createYoApp(ph, type);
         return Collections.emptySet();
     }
 
@@ -93,59 +84,32 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                 public Process call() throws Exception {
                     String yo = NbPreferences.forModule(YeomanOptionsPanelController.class).get("yoExecutableLocation", "");
                     //Format: oraclejet:hybrid app --appName=app --template=navBar --platforms=android
-                    if (type.equals("blank-android")) {
+                    if (type.equals("blank")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName="+projectName).
+                                addArgument("--appName=" + projectName).
                                 addArgument("--template=blank").
-                                addArgument("--platforms=android").
+                                addArgument("--platforms="+wiz.getProperty("platform")).
                                 workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("blank-ios")) {
+                    } else if (type.equals("navbar")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName="+projectName).
-                                addArgument("--template=blank").
-                                addArgument("--platforms=ios").
-                                workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navbar-android")) {
-                        process
-                                = new ExternalProcessBuilder(yo).
-                                addArgument("oraclejet:hybrid").
-                                addArgument(projectName).
-                                addArgument("--appName="+projectName).
+                                addArgument("--appName=" + projectName).
                                 addArgument("--template=navbar").
-                                addArgument("--platforms=android").
+                                addArgument("--platforms="+wiz.getProperty("platform")).
                                 workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navbar-ios")) {
+                    } else if (type.equals("navdrawer")) {
                         process
                                 = new ExternalProcessBuilder(yo).
                                 addArgument("oraclejet:hybrid").
                                 addArgument(projectName).
-                                addArgument("--appName="+projectName).
-                                addArgument("--template=navbar").
-                                addArgument("--platforms=ios").
-                                workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navdrawer-android")) {
-                        process
-                                = new ExternalProcessBuilder(yo).
-                                addArgument("oraclejet:hybrid").
-                                addArgument(projectName).
-                                addArgument("--appName="+projectName).
+                                addArgument("--appName=" + projectName).
                                 addArgument("--template=navdrawer").
-                                addArgument("--platforms=android").
-                                workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navdrawer-ios")) {
-                        process
-                                = new ExternalProcessBuilder(yo).
-                                addArgument("oraclejet:hybrid").
-                                addArgument(projectName).
-                                addArgument("--appName="+projectName).
-                                addArgument("--template=navdrawer").
-                                addArgument("--platforms=ios").
+                                addArgument("--platforms="+wiz.getProperty("platform")).
                                 workingDirectory(new File(dirF.getParent())).call();
                     }
                     dialogProcessor.setWriter(new OutputStreamWriter(process.getOutputStream()));
@@ -166,20 +130,7 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                         public LineConvertor newLineConvertor() {
                             return new Numbered();
                         }
-                    })
-//                    .outProcessorFactory(new ExecutionDescriptor.InputProcessorFactory() {
-//                        @Override
-//                        public InputProcessor newInputProcessor(InputProcessor defaultProcessor) {
-//                            return InputProcessors.proxy(defaultProcessor, InputProcessors.bridge(new ProgressLineProcessor(process, handle, 100, 1)));
-//                        }
-//                    })
-//                    .errProcessorFactory(new ExecutionDescriptor.InputProcessorFactory() {
-//                        @Override
-//                        public InputProcessor newInputProcessor(InputProcessor defaultProcessor) {
-//                            return InputProcessors.proxy(defaultProcessor, InputProcessors.bridge(dialogProcessor));
-//                        }
-//                    }
-                    ;
+                    });
             ExecutionService service = ExecutionService.newService(callable, descriptor, "Yeoman");
             Future<Integer> future = service.run();
             try {
@@ -194,54 +145,12 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
             handle.finish();
         }
         FileObject dir = FileUtil.toFileObject(dirF);
-//        dir.refresh();
-//        if (dir.getFileObject("pom.xml") == null) {
-//            FileObject nbprojectFolder = dir.createFolder("nbproject");
-//            FileObject projectXML = nbprojectFolder.createData("project", "xml");
-//            writeTemplate(projectXML,projectName);
-////            FileObject projectProperties = nbprojectFolder.createData("project", "properties");
         Project p = FileOwnerQuery.getOwner(dir);
         OpenProjects.getDefault().open(new Project[]{p}, true, true);
-//        } else {
-//            Project p = FileOwnerQuery.getOwner(dir);
-//            OpenProjects.getDefault().open(new Project[]{p}, true, true);
-//        }
     }
 
-//    private void writeTemplate(FileObject obj, String name) {
-//        FileLock fileLock = null;
-//        OutputStreamWriter osw;
-//        try {
-//            fileLock = obj.lock();
-//            OutputStream fout = obj.getOutputStream(fileLock);
-//            OutputStream bout = new BufferedOutputStream(fout);
-//            osw = new OutputStreamWriter(bout, "UTF-8");
-//            osw.write(
-//                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-//                    + "<project xmlns=\"http://www.netbeans.org/ns/project/1\">\n"
-//                    + "    <type>org.netbeans.modules.web.clientproject</type>\n"
-//                    + "    <configuration>\n"
-//                    + "        <data xmlns=\"http://www.netbeans.org/ns/clientside-project/1\">\n"
-//                    + "            <name>"+name+"</name>\n"
-//                    + "        </data>\n"
-//                    + "    </configuration>\n"
-//                    + "</project>"
-//            );
-//            osw.flush();
-//            osw.close();
-//        } catch (IOException ex) {
-//        } finally {
-//            if (fileLock != null) {
-//                fileLock.releaseLock();
-//            }
-//        }
-//    }
-
-
     private class Numbered implements LineConvertor {
-
         private int number;
-
         @Override
         public List<ConvertedLine> convert(String line) {
             List<ConvertedLine> result = Collections.singletonList(ConvertedLine.forText(number + ": " + line, null));
@@ -359,63 +268,4 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
     public final void removeChangeListener(ChangeListener l) {
     }
 
-//    private static void unZipFile(InputStream source, FileObject projectRoot) throws IOException {
-//        try {
-//            ZipInputStream str = new ZipInputStream(source);
-//            ZipEntry entry;
-//            while ((entry = str.getNextEntry()) != null) {
-//                if (entry.isDirectory()) {
-//                    FileUtil.createFolder(projectRoot, entry.getName());
-//                } else {
-//                    FileObject fo = FileUtil.createData(projectRoot, entry.getName());
-//                    if ("nbproject/project.xml".equals(entry.getName())) {
-//                        // Special handling for setting name of Ant-based projects; customize as needed:
-//                        filterProjectXML(fo, str, projectRoot.getName());
-//                    } else {
-//                        writeFile(str, fo);
-//                    }
-//                }
-//            }
-//        } finally {
-//            source.close();
-//        }
-//    }
-//    private static void writeFile(ZipInputStream str, FileObject fo) throws IOException {
-//        OutputStream out = fo.getOutputStream();
-//        try {
-//            FileUtil.copy(str, out);
-//        } finally {
-//            out.close();
-//        }
-//    }
-
-//    private static void filterProjectXML(FileObject fo, ZipInputStream str, String name) throws IOException {
-//        try {
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            FileUtil.copy(str, baos);
-//            Document doc = XMLUtil.parse(new InputSource(new ByteArrayInputStream(baos.toByteArray())), false, false, null, null);
-//            NodeList nl = doc.getDocumentElement().getElementsByTagName("name");
-//            if (nl != null) {
-//                for (int i = 0; i < nl.getLength(); i++) {
-//                    Element el = (Element) nl.item(i);
-//                    if (el.getParentNode() != null && "data".equals(el.getParentNode().getNodeName())) {
-//                        NodeList nl2 = el.getChildNodes();
-//                        if (nl2.getLength() > 0) {
-//                            nl2.item(0).setNodeValue(name);
-//                        }
-//                        break;
-//                    }
-//                }
-//            }
-//            OutputStream out = fo.getOutputStream();
-//            try {
-//                XMLUtil.write(doc, out, "UTF-8");
-//            } finally {
-//                out.close();
-//            }
-//        } catch (Exception ex) {
-//            Exceptions.printStackTrace(ex);
-//            writeFile(str, fo);
-//        }
-//    }
 }
