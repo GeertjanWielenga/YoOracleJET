@@ -60,9 +60,8 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
 
     @Override
     public Set instantiate() throws IOException {
-//        final String type = Templates.getTemplate(wiz).getAttribute("type").toString();
-        final String type = (String) wiz.getProperty("type");
-        String message = "Creating "+ type +" Oracle JET application...";
+        final String type = (String) wiz.getProperty("template");
+        String message = "Creating " + type + " Oracle JET application...";
         ProgressHandle ph = ProgressHandleFactory.createSystemHandle(message);
         ph.start();
         createYoApp(ph, type);
@@ -71,9 +70,12 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
 
     private Process process;
 
-    private void createYoApp(final ProgressHandle handle, final String type) throws IOException {
+    private void createYoApp(final ProgressHandle handle, final String template) throws IOException {
         final File dirF = FileUtil.normalizeFile((File) wiz.getProperty("projdir"));
         final String projectName = (String) wiz.getProperty("name");
+        final String platforms = (String) wiz.getProperty("platforms");
+        final String hybridYeomanCommand = (String) wiz.getProperty("hybridYeomanCommand");
+        StatusDisplayer.getDefault().setStatusText(hybridYeomanCommand);
         dirF.mkdirs();
         handle.start(100);
         try {
@@ -82,35 +84,15 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
                 @Override
                 public Process call() throws Exception {
                     String yo = NbPreferences.forModule(YeomanOptionsPanelController.class).get("yoExecutableLocation", "");
-                    //Format: oraclejet:hybrid app --appName=app --template=navBar --platforms=android
-                    if (type.equals("blank")) {
-                        process
-                                = new ExternalProcessBuilder(yo).
-                                addArgument("oraclejet:hybrid").
-                                addArgument(projectName).
-                                addArgument("--appName=" + projectName).
-                                addArgument("--template=blank").
-                                addArgument("--platforms="+wiz.getProperty("platform")).
-                                workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navbar")) {
-                        process
-                                = new ExternalProcessBuilder(yo).
-                                addArgument("oraclejet:hybrid").
-                                addArgument(projectName).
-                                addArgument("--appName=" + projectName).
-                                addArgument("--template=navbar").
-                                addArgument("--platforms="+wiz.getProperty("platform")).
-                                workingDirectory(new File(dirF.getParent())).call();
-                    } else if (type.equals("navdrawer")) {
-                        process
-                                = new ExternalProcessBuilder(yo).
-                                addArgument("oraclejet:hybrid").
-                                addArgument(projectName).
-                                addArgument("--appName=" + projectName).
-                                addArgument("--template=navdrawer").
-                                addArgument("--platforms="+wiz.getProperty("platform")).
-                                workingDirectory(new File(dirF.getParent())).call();
-                    }
+                    //Format: oraclejet:hybrid app --appName=app --template=navbar --platforms=android
+                    process
+                            = new ExternalProcessBuilder(yo).
+                            addArgument("oraclejet:hybrid").
+                            addArgument(projectName).
+                            addArgument("--appName=" + projectName).
+                            addArgument("--template="+template).
+                            addArgument("--platforms=" + platforms).
+                            workingDirectory(new File(dirF.getParent())).call();
                     dialogProcessor.setWriter(new OutputStreamWriter(process.getOutputStream()));
                     return process;
                 }

@@ -27,7 +27,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private String template;
 
     private YeomanNameLocationWizardPanel panel;
-    private String selectedPlatform;
+    private String selectedPlatforms;
 
     public YeomanNameLocationPanelVisual(YeomanNameLocationWizardPanel panel) {
         initComponents();
@@ -65,6 +65,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                 joiner.add(platform);
             }
         }
+        setSelectedPlatforms(joiner.toString());
         hybridYeomanCommand = "yo oraclejet:hybrid --appName=" + appName + " --template=" + templateName + " --platforms=" + joiner.toString();
         commandPreviewLabel.setText(hybridYeomanCommand);
     }
@@ -96,7 +97,6 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            setSelectedPlatform(platform);
             if (!platformList.contains(platform)) {
                 platformList.add(platform);
             }
@@ -121,12 +121,12 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         return this.projectNameTextField.getText();
     }
 
-    public void setSelectedPlatform(String selectedPlatform) {
-        this.selectedPlatform = selectedPlatform;
+    public void setSelectedPlatforms(String selectedPlatforms) {
+        this.selectedPlatforms = selectedPlatforms;
     }
 
-    public String getSelectedPlatform() {
-        return selectedPlatform;
+    public String getSelectedPlatforms() {
+        return selectedPlatforms;
     }
 
     public String getSelectedTemplate() {
@@ -444,6 +444,9 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
         d.putProperty("projdir", new File(folder));
         d.putProperty("name", name);
+        d.putProperty("template", getSelectedTemplate());
+        d.putProperty("platforms", getSelectedPlatforms());
+        d.putProperty("hybridYeomanCommand", hybridYeomanCommand);
     }
 
     void read(WizardDescriptor settings) {
@@ -461,9 +464,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 //            final String type = Templates.getTemplate(settings).getAttribute("type").toString();
             final String type = getSelectedTemplate();
             settings.putProperty("type", type);
-            String platform = getSelectedPlatform();
-            settings.putProperty("platform", platform);
-            settings.putProperty("hybridYeomanCommand", hybridYeomanCommand);
+            settings.putProperty("platforms", getSelectedPlatforms());
             projectName = "HybridOracleJETApp";
         }
         this.projectNameTextField.setText(projectName);
