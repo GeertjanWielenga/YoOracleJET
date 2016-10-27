@@ -18,6 +18,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     public static final String PROP_PROJECT_NAME = "projectName";
 
     private YeomanNameLocationWizardPanel panel;
+    private String selectedPlatform;
 
     public YeomanNameLocationPanelVisual(YeomanNameLocationWizardPanel panel) {
         initComponents();
@@ -25,8 +26,9 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         // Register listener on the textFields to make the automatic updates
         projectNameTextField.getDocument().addDocumentListener(this);
         projectLocationTextField.getDocument().addDocumentListener(this);
-        androidPlatformChoice.setActionCommand("android");
-        iosPlatformChoice.setActionCommand("ios");
+        androidPlatformChoice.addActionListener(new SwitchPlatformActionListener("android"));
+        iosPlatformChoice.addActionListener(new SwitchPlatformActionListener("ios"));
+        windowsPlatformChoice.addActionListener(new SwitchPlatformActionListener("windows"));
         blankTemplateChoice.setActionCommand("blank");
         basicTemplateChoice.setActionCommand("basic");
         navbarTemplateChoice.setActionCommand("navbar");
@@ -53,12 +55,27 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         }
     }
 
+    private class SwitchPlatformActionListener implements ActionListener {
+        private final String platform;
+        private SwitchPlatformActionListener(String platform) {
+            this.platform = platform;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setSelectedPlatform(platform);
+        }
+    }
+
     public String getProjectName() {
         return this.projectNameTextField.getText();
     }
 
+    public void setSelectedPlatform(String selectedPlatform) {
+        this.selectedPlatform = selectedPlatform;
+    }
+
     public String getSelectedPlatform() {
-        return buttonGroup1.getSelection().getActionCommand();
+        return selectedPlatform;
     }
 
     public String getSelectedTemplate() {
@@ -178,14 +195,11 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jPanel2.border.title"))); // NOI18N
 
-        buttonGroup1.add(androidPlatformChoice);
         androidPlatformChoice.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(androidPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.androidPlatformChoice.text")); // NOI18N
 
-        buttonGroup1.add(iosPlatformChoice);
         org.openide.awt.Mnemonics.setLocalizedText(iosPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.iosPlatformChoice.text")); // NOI18N
 
-        buttonGroup1.add(windowsPlatformChoice);
         org.openide.awt.Mnemonics.setLocalizedText(windowsPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.windowsPlatformChoice.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
