@@ -61,8 +61,8 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
     @Override
     public Set instantiate() throws IOException {
         final String type = (String) wiz.getProperty("template");
-        String message = "Creating " + type + " Oracle JET application...";
-        ProgressHandle ph = ProgressHandleFactory.createSystemHandle(message);
+        final String hybridYeomanCommand = (String) wiz.getProperty("hybridYeomanCommand");
+        ProgressHandle ph = ProgressHandleFactory.createSystemHandle(hybridYeomanCommand);
         ph.start();
         createYoApp(ph, type);
         return Collections.emptySet();
