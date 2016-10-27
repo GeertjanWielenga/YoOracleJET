@@ -3,6 +3,8 @@ package org.netbeans.modules.yooj.panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
@@ -20,7 +22,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
     private String hybridYeomanCommand;
 
-    private StringJoiner joiner = new StringJoiner(",");
+    private List<String> platformList = new ArrayList<>();
 
     private YeomanNameLocationWizardPanel panel;
     private String selectedPlatform;
@@ -42,56 +44,73 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         basicTemplateChoice.addActionListener(new SwitchTemplateActionListener());
         navbarTemplateChoice.addActionListener(new SwitchTemplateActionListener());
         navdrawerTemplateChoice.addActionListener(new SwitchTemplateActionListener());
-        joiner.add("android");
-        joiner.add("ios");
-        setHybridYeomanCommand(getProjectName(), buttonGroup2.getSelection().getActionCommand(), joiner.toString());
+        platformList.add("android");
+        setHybridYeomanCommand(
+                "HybridOracleJETApp",
+                buttonGroup2.getSelection().getActionCommand(),
+                platformList);
     }
 
     public String getHybridYeomanCommand() {
         return hybridYeomanCommand;
     }
 
-    public void setHybridYeomanCommand(String appName, String templateName, String platforms) {
+    public void setHybridYeomanCommand(String appName, String templateName, List<String> platforms) {
         //Format: oraclejet:hybrid app --appName=app --template=navBar --platforms=android
-
-        hybridYeomanCommand = "yo oraclejet:hybrid --appName=" + appName + " --template=" + templateName + " --platforms=" + platforms;
-
+        StringJoiner joiner = new StringJoiner(",");
+        for (String platform : platforms) {
+            if (!joiner.toString().contains(platform)) {
+                joiner.add(platform);
+            }
+        }
+        hybridYeomanCommand = "yo oraclejet:hybrid --appName=" + appName + " --template=" + templateName + " --platforms=" + joiner.toString();
         commandPreviewLabel.setText(hybridYeomanCommand);
-
     }
 
     private class SwitchTemplateActionListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             String template = buttonGroup2.getSelection().getActionCommand();
             if (template.equals("blank")) {
                 descriptionLabel.setText("No starter content, only the Oracle JET distribution.");
-                setHybridYeomanCommand(getProjectName(), buttonGroup2.getSelection().getActionCommand(), joiner.toString());
             } else if (template.equals("basic")) {
                 descriptionLabel.setText("A basic starter without any navigation.");
-                setHybridYeomanCommand(getProjectName(), buttonGroup2.getSelection().getActionCommand(), joiner.toString());
             } else if (template.equals("navbar")) {
                 descriptionLabel.setText("A starter with a navigation bar.");
-                setHybridYeomanCommand(getProjectName(), buttonGroup2.getSelection().getActionCommand(), joiner.toString());
             } else if (template.equals("navdrawer")) {
                 descriptionLabel.setText("A starter with a navigation drawer.");
-                setHybridYeomanCommand(getProjectName(), buttonGroup2.getSelection().getActionCommand(), joiner.toString());
             }
+            setHybridYeomanCommand(
+                    getProjectName(),
+                    template,
+                    platformList);
         }
     }
 
     private class SwitchPlatformActionListener implements ActionListener {
-
         private final String platform;
-
         private SwitchPlatformActionListener(String platform) {
             this.platform = platform;
         }
-
         @Override
         public void actionPerformed(ActionEvent e) {
             setSelectedPlatform(platform);
+            if (!platformList.contains(platform)) {
+                platformList.add(platform);
+            }
+            if (!androidPlatformChoice.isSelected()&&platformList.contains("android")){
+                platformList.remove("android");
+            }
+            if (!iosPlatformChoice.isSelected()&&platformList.contains("ios")){
+                platformList.remove("ios");
+            }
+            if (!windowsPlatformChoice.isSelected()&&platformList.contains("windows")){
+                platformList.remove("windows");
+            }
+            setHybridYeomanCommand(
+                    getProjectName(),
+                    getSelectedTemplate(),
+                    platformList);
         }
     }
 
@@ -170,6 +189,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         buttonGroup2.add(navbarTemplateChoice);
         org.openide.awt.Mnemonics.setLocalizedText(navbarTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navbarTemplateChoice.text")); // NOI18N
 
+        descriptionLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(descriptionLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.descriptionLabel.text")); // NOI18N
 
         buttonGroup2.add(basicTemplateChoice);
@@ -182,6 +202,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         buttonGroup2.add(navdrawerTemplateChoice);
         org.openide.awt.Mnemonics.setLocalizedText(navdrawerTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navdrawerTemplateChoice.text")); // NOI18N
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel2.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -203,7 +224,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)))
+                        .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
