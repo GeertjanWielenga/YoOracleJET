@@ -24,6 +24,8 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
     private List<String> platformList = new ArrayList<>();
 
+    private String template;
+
     private YeomanNameLocationWizardPanel panel;
     private String selectedPlatform;
 
@@ -47,7 +49,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         platformList.add("android");
         setHybridYeomanCommand(
                 "HybridOracleJETApp",
-                buttonGroup2.getSelection().getActionCommand(),
+                templateButtonGroup.getSelection().getActionCommand(),
                 platformList);
     }
 
@@ -70,7 +72,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private class SwitchTemplateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String template = buttonGroup2.getSelection().getActionCommand();
+            template = templateButtonGroup.getSelection().getActionCommand();
             if (template.equals("blank")) {
                 descriptionLabel.setText("No starter content, only the Oracle JET distribution.");
             } else if (template.equals("basic")) {
@@ -127,7 +129,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     }
 
     public String getSelectedTemplate() {
-        return buttonGroup2.getSelection().getActionCommand();
+        return templateButtonGroup.getSelection().getActionCommand();
     }
 
     /**
@@ -139,7 +141,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        templateButtonGroup = new javax.swing.ButtonGroup();
         projectNameLabel = new javax.swing.JLabel();
         projectNameTextField = new javax.swing.JTextField();
         projectLocationLabel = new javax.swing.JLabel();
@@ -186,20 +188,20 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jPanel1.border.title"))); // NOI18N
 
-        buttonGroup2.add(navbarTemplateChoice);
+        templateButtonGroup.add(navbarTemplateChoice);
         org.openide.awt.Mnemonics.setLocalizedText(navbarTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navbarTemplateChoice.text")); // NOI18N
 
         descriptionLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(descriptionLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.descriptionLabel.text")); // NOI18N
 
-        buttonGroup2.add(basicTemplateChoice);
+        templateButtonGroup.add(basicTemplateChoice);
         org.openide.awt.Mnemonics.setLocalizedText(basicTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.basicTemplateChoice.text")); // NOI18N
 
-        buttonGroup2.add(blankTemplateChoice);
+        templateButtonGroup.add(blankTemplateChoice);
         blankTemplateChoice.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(blankTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.blankTemplateChoice.text")); // NOI18N
 
-        buttonGroup2.add(navdrawerTemplateChoice);
+        templateButtonGroup.add(navdrawerTemplateChoice);
         org.openide.awt.Mnemonics.setLocalizedText(navdrawerTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navdrawerTemplateChoice.text")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -360,7 +362,6 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private javax.swing.JRadioButton blankTemplateChoice;
     private javax.swing.JButton browseButton;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel commandPreviewLabel;
     private javax.swing.JLabel createdFolderLabel;
     private javax.swing.JTextField createdFolderTextField;
@@ -376,6 +377,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private javax.swing.JTextField projectLocationTextField;
     private javax.swing.JLabel projectNameLabel;
     private javax.swing.JTextField projectNameTextField;
+    private javax.swing.ButtonGroup templateButtonGroup;
     private javax.swing.JCheckBox windowsPlatformChoice;
     // End of variables declaration//GEN-END:variables
 
@@ -499,6 +501,11 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
             String projectName = projectNameTextField.getText();
             String projectFolder = projectLocationTextField.getText();
+
+            setHybridYeomanCommand(
+                    projectName,
+                    template,
+                    platformList);
 
             //if (projectFolder.trim().length() == 0 || projectFolder.equals(oldName)) {
             createdFolderTextField.setText(projectFolder + File.separatorChar + projectName);
