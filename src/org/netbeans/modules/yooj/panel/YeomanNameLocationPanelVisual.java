@@ -47,9 +47,10 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         navbarTemplateChoice.addActionListener(new SwitchTemplateActionListener());
         navdrawerTemplateChoice.addActionListener(new SwitchTemplateActionListener());
         platformList.add("android");
+        template = "blank";
         setHybridYeomanCommand(
                 "HybridOracleJETApp",
-                templateButtonGroup.getSelection().getActionCommand(),
+                template,
                 platformList);
     }
 
@@ -111,7 +112,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
             }
             setHybridYeomanCommand(
                     getProjectName(),
-                    getSelectedTemplate(),
+                    template,
                     platformList);
             panel.fireChangeEvent(); // Notify that the panel changed
         }
