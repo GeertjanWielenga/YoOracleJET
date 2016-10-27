@@ -27,7 +27,6 @@ import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.OpenProjects;
 import org.netbeans.modules.yooj.options.YeomanOptionsPanelController;
-import org.netbeans.spi.project.ui.templates.support.Templates;
 import org.openide.WizardDescriptor;
 import org.openide.awt.StatusDisplayer;
 import org.openide.filesystems.FileObject;
@@ -55,14 +54,14 @@ public class YeomanWizardIterator implements WizardDescriptor.InstantiatingItera
 
     private String[] createSteps() {
         return new String[]{
-            NbBundle.getMessage(YeomanWizardIterator.class, "LBL_HelloWorld"),
             NbBundle.getMessage(YeomanWizardIterator.class, "LBL_CreateProjectStep")
         };
     }
 
     @Override
     public Set instantiate() throws IOException {
-        final String type = Templates.getTemplate(wiz).getAttribute("type").toString();
+//        final String type = Templates.getTemplate(wiz).getAttribute("type").toString();
+        final String type = (String) wiz.getProperty("type");
         String message = "Creating "+ type +" Oracle JET application...";
         ProgressHandle ph = ProgressHandleFactory.createSystemHandle(message);
         ph.start();

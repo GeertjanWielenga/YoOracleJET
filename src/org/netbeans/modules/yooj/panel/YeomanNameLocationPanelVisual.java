@@ -7,7 +7,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import org.netbeans.spi.project.ui.support.ProjectChooser;
-import org.netbeans.spi.project.ui.templates.support.Templates;
 import org.openide.WizardDescriptor;
 import org.openide.WizardValidationException;
 import org.openide.filesystems.FileUtil;
@@ -26,6 +25,10 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         projectLocationTextField.getDocument().addDocumentListener(this);
         androidPlatformChoice.setActionCommand("android");
         iosPlatformChoice.setActionCommand("ios");
+        blankTemplateChoice.setActionCommand("blank");
+        basicTemplateChoice.setActionCommand("basic");
+        navbarTemplateChoice.setActionCommand("navbar");
+        navdrawerTemplateChoice.setActionCommand("navdrawer");
     }
 
     public String getProjectName() {
@@ -34,6 +37,10 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
     public String getSelectedPlatform() {
         return buttonGroup1.getSelection().getActionCommand();
+    }
+
+    public String getSelectedTemplate() {
+        return buttonGroup2.getSelection().getActionCommand();
     }
 
     /**
@@ -45,6 +52,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         projectNameLabel = new javax.swing.JLabel();
         projectNameTextField = new javax.swing.JTextField();
         projectLocationLabel = new javax.swing.JLabel();
@@ -55,6 +63,12 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         jLabel1 = new javax.swing.JLabel();
         androidPlatformChoice = new javax.swing.JRadioButton();
         iosPlatformChoice = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        blankTemplateChoice = new javax.swing.JRadioButton();
+        basicTemplateChoice = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        navbarTemplateChoice = new javax.swing.JRadioButton();
+        navdrawerTemplateChoice = new javax.swing.JRadioButton();
 
         projectNameLabel.setLabelFor(projectNameTextField);
         org.openide.awt.Mnemonics.setLocalizedText(projectNameLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.projectNameLabel.text")); // NOI18N
@@ -84,6 +98,23 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         buttonGroup1.add(iosPlatformChoice);
         org.openide.awt.Mnemonics.setLocalizedText(iosPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.iosPlatformChoice.text")); // NOI18N
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel2.text")); // NOI18N
+
+        buttonGroup2.add(blankTemplateChoice);
+        blankTemplateChoice.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(blankTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.blankTemplateChoice.text")); // NOI18N
+
+        buttonGroup2.add(basicTemplateChoice);
+        org.openide.awt.Mnemonics.setLocalizedText(basicTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.basicTemplateChoice.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel3.text")); // NOI18N
+
+        buttonGroup2.add(navbarTemplateChoice);
+        org.openide.awt.Mnemonics.setLocalizedText(navbarTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navbarTemplateChoice.text")); // NOI18N
+
+        buttonGroup2.add(navdrawerTemplateChoice);
+        org.openide.awt.Mnemonics.setLocalizedText(navdrawerTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navdrawerTemplateChoice.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,6 +125,8 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                     .addComponent(projectNameLabel)
                     .addComponent(projectLocationLabel)
                     .addComponent(createdFolderLabel)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +138,18 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(androidPlatformChoice)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(androidPlatformChoice)
+                            .addComponent(blankTemplateChoice))
                         .addGap(18, 18, 18)
-                        .addComponent(iosPlatformChoice)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(iosPlatformChoice)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(basicTemplateChoice)
+                                .addGap(18, 18, 18)
+                                .addComponent(navbarTemplateChoice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(navdrawerTemplateChoice)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -127,7 +169,16 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createdFolderLabel)
                     .addComponent(createdFolderTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(blankTemplateChoice)
+                    .addComponent(basicTemplateChoice)
+                    .addComponent(jLabel2)
+                    .addComponent(navbarTemplateChoice)
+                    .addComponent(navdrawerTemplateChoice))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(androidPlatformChoice)
                     .addComponent(iosPlatformChoice)
@@ -161,12 +212,19 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton androidPlatformChoice;
+    private javax.swing.JRadioButton basicTemplateChoice;
+    private javax.swing.JRadioButton blankTemplateChoice;
     private javax.swing.JButton browseButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel createdFolderLabel;
     private javax.swing.JTextField createdFolderTextField;
     private javax.swing.JRadioButton iosPlatformChoice;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JRadioButton navbarTemplateChoice;
+    private javax.swing.JRadioButton navdrawerTemplateChoice;
     private javax.swing.JLabel projectLocationLabel;
     private javax.swing.JTextField projectLocationTextField;
     private javax.swing.JLabel projectNameLabel;
@@ -243,10 +301,12 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         String projectName = (String) settings.getProperty("name");
         if (projectName == null) {
 //            projectName = settings.getProperty("selectedGenerator").toString().replace(":", "-");
-            final String type = Templates.getTemplate(settings).getAttribute("type").toString();
+//            final String type = Templates.getTemplate(settings).getAttribute("type").toString();
+            final String type = getSelectedTemplate();
+            settings.putProperty("type", type);
             String platform = getSelectedPlatform();
             settings.putProperty("platform", platform);
-            projectName = type+"HybridOracleJETApp";
+            projectName = "HybridOracleJETApp";
         }
         this.projectNameTextField.setText(projectName);
         this.projectNameTextField.selectAll();
