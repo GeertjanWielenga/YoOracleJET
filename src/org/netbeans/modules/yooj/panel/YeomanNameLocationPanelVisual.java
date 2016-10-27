@@ -113,6 +113,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                     getProjectName(),
                     getSelectedTemplate(),
                     platformList);
+            panel.fireChangeEvent(); // Notify that the panel changed
         }
     }
 
@@ -389,6 +390,12 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     }
 
     boolean valid(WizardDescriptor wizardDescriptor) {
+
+        if (!androidPlatformChoice.isSelected()&&!iosPlatformChoice.isSelected()&&!windowsPlatformChoice.isSelected()) {
+            wizardDescriptor.putProperty("WizardPanel_errorMessage",
+                    "Must select at least one platform.");
+            return false;
+        }
 
         if (projectNameTextField.getText().length() == 0) {
             // TODO if using org.openide.dialogs >= 7.8, can use WizardDescriptor.PROP_ERROR_MESSAGE:
