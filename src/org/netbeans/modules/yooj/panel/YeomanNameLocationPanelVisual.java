@@ -1,5 +1,7 @@
 package org.netbeans.modules.yooj.panel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
@@ -29,6 +31,26 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         basicTemplateChoice.setActionCommand("basic");
         navbarTemplateChoice.setActionCommand("navbar");
         navdrawerTemplateChoice.setActionCommand("navdrawer");
+        blankTemplateChoice.addActionListener(new SwitchTemplateActionListener());
+        basicTemplateChoice.addActionListener(new SwitchTemplateActionListener());
+        navbarTemplateChoice.addActionListener(new SwitchTemplateActionListener());
+        navdrawerTemplateChoice.addActionListener(new SwitchTemplateActionListener());
+    }
+
+    private class SwitchTemplateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String template = buttonGroup2.getSelection().getActionCommand();
+            if (template.equals("blank")) {
+                descriptionLabel.setText("No starter content, only the Oracle JET distribution.");
+            } else if (template.equals("basic")) {
+                descriptionLabel.setText("A basic starter without any navigation.");
+            } else if (template.equals("navbar")) {
+                descriptionLabel.setText("A starter with a navigation bar.");
+            } else if (template.equals("navdrawer")) {
+                descriptionLabel.setText("A starter with a navigation drawer.");
+            }
+        }
     }
 
     public String getProjectName() {
@@ -63,14 +85,15 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         jLabel1 = new javax.swing.JLabel();
         androidPlatformChoice = new javax.swing.JRadioButton();
         iosPlatformChoice = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        blankTemplateChoice = new javax.swing.JRadioButton();
-        basicTemplateChoice = new javax.swing.JRadioButton();
-        descriptionLabel = new javax.swing.JLabel();
-        navbarTemplateChoice = new javax.swing.JRadioButton();
-        navdrawerTemplateChoice = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         commandPreviewLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        navbarTemplateChoice = new javax.swing.JRadioButton();
+        descriptionLabel = new javax.swing.JLabel();
+        basicTemplateChoice = new javax.swing.JRadioButton();
+        blankTemplateChoice = new javax.swing.JRadioButton();
+        navdrawerTemplateChoice = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
 
         projectNameLabel.setLabelFor(projectNameTextField);
         org.openide.awt.Mnemonics.setLocalizedText(projectNameLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.projectNameLabel.text")); // NOI18N
@@ -100,26 +123,66 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
         buttonGroup1.add(iosPlatformChoice);
         org.openide.awt.Mnemonics.setLocalizedText(iosPlatformChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.iosPlatformChoice.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel4.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(commandPreviewLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.commandPreviewLabel.text")); // NOI18N
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jPanel1.border.title"))); // NOI18N
+
+        buttonGroup2.add(navbarTemplateChoice);
+        org.openide.awt.Mnemonics.setLocalizedText(navbarTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navbarTemplateChoice.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(descriptionLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.descriptionLabel.text")); // NOI18N
+
+        buttonGroup2.add(basicTemplateChoice);
+        org.openide.awt.Mnemonics.setLocalizedText(basicTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.basicTemplateChoice.text")); // NOI18N
 
         buttonGroup2.add(blankTemplateChoice);
         blankTemplateChoice.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(blankTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.blankTemplateChoice.text")); // NOI18N
 
-        buttonGroup2.add(basicTemplateChoice);
-        org.openide.awt.Mnemonics.setLocalizedText(basicTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.basicTemplateChoice.text")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(descriptionLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.descriptionLabel.text")); // NOI18N
-
-        buttonGroup2.add(navbarTemplateChoice);
-        org.openide.awt.Mnemonics.setLocalizedText(navbarTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navbarTemplateChoice.text")); // NOI18N
-
         buttonGroup2.add(navdrawerTemplateChoice);
         org.openide.awt.Mnemonics.setLocalizedText(navdrawerTemplateChoice, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.navdrawerTemplateChoice.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel4.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.jLabel2.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(commandPreviewLabel, org.openide.util.NbBundle.getMessage(YeomanNameLocationPanelVisual.class, "YeomanNameLocationPanelVisual.commandPreviewLabel.text")); // NOI18N
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(blankTemplateChoice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(basicTemplateChoice)
+                        .addGap(18, 18, 18)
+                        .addComponent(navbarTemplateChoice)
+                        .addGap(18, 18, 18)
+                        .addComponent(navdrawerTemplateChoice)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(blankTemplateChoice)
+                    .addComponent(basicTemplateChoice)
+                    .addComponent(navbarTemplateChoice)
+                    .addComponent(navdrawerTemplateChoice))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(descriptionLabel)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,37 +196,26 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                             .addComponent(projectNameLabel)
                             .addComponent(projectLocationLabel)
                             .addComponent(createdFolderLabel)
-                            .addComponent(jLabel2)
-                            .addComponent(descriptionLabel)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(projectNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                                    .addComponent(projectLocationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                                    .addComponent(createdFolderTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
+                                    .addComponent(projectNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                                    .addComponent(projectLocationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                                    .addComponent(createdFolderTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(browseButton))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(androidPlatformChoice)
-                                    .addComponent(blankTemplateChoice))
+                                .addComponent(androidPlatformChoice)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(iosPlatformChoice)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(basicTemplateChoice)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(navbarTemplateChoice)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(navdrawerTemplateChoice)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(iosPlatformChoice)
+                                .addGap(0, 277, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(commandPreviewLabel))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(commandPreviewLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -183,15 +235,8 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
                     .addComponent(createdFolderLabel)
                     .addComponent(createdFolderTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(blankTemplateChoice)
-                    .addComponent(basicTemplateChoice)
-                    .addComponent(jLabel2)
-                    .addComponent(navbarTemplateChoice)
-                    .addComponent(navdrawerTemplateChoice))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descriptionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(androidPlatformChoice)
                     .addComponent(iosPlatformChoice)
@@ -242,6 +287,7 @@ public class YeomanNameLocationPanelVisual extends JPanel implements DocumentLis
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton navbarTemplateChoice;
     private javax.swing.JRadioButton navdrawerTemplateChoice;
     private javax.swing.JLabel projectLocationLabel;
