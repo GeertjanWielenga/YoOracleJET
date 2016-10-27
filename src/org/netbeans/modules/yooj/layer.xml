@@ -15,9 +15,19 @@
                     <attr boolvalue="true" name="requireProject"/>
                     <attr name="type" stringvalue="blank"/>
                 </file>
-                <file name="org-netbeans-modules-yooj-NavBarProject">
+                <file name="org-netbeans-modules-yooj-BasicProject">
                     <attr boolvalue="true" name="template"/>
                     <attr intvalue="802" name="position"/>
+                    <attr bundlevalue="org.netbeans.modules.yooj.Bundle#Basic_displayName" name="displayName"/>
+                    <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
+                    <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/BasicJETWizardDescription.html"/>
+                    <attr name="instantiatingIterator" newvalue="org.netbeans.modules.yooj.panel.YeomanWizardIterator"/>
+                    <attr boolvalue="true" name="requireProject"/>
+                    <attr name="type" stringvalue="basic"/>
+                </file>
+                <file name="org-netbeans-modules-yooj-NavBarProject">
+                    <attr boolvalue="true" name="template"/>
+                    <attr intvalue="804" name="position"/>
                     <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavBar_displayName" name="displayName"/>
                     <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
                     <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/NavBarJETWizardDescription.html"/>
@@ -27,7 +37,7 @@
                 </file>
                 <file name="org-netbeans-modules-yooj-NavDrawerProject">
                     <attr boolvalue="true" name="template"/>
-                    <attr intvalue="804" name="position"/>
+                    <attr intvalue="806" name="position"/>
                     <attr bundlevalue="org.netbeans.modules.yooj.Bundle#NavDrawer_displayName" name="displayName"/>
                     <attr name="iconBase" stringvalue="org/netbeans/modules/yooj/resources/yo.png"/>
                     <attr name="instantiatingWizardURL" urlvalue="nbresloc:/org/netbeans/modules/yooj/resources/NavDrawerJETWizardDescription.html"/>
